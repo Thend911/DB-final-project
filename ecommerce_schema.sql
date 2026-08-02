@@ -36,10 +36,6 @@ CREATE TABLE Buyer (
 
 -- ------------------------------------------------------------
 -- Strong entity: Product
--- Category is stored directly on Product (denormalized attribute,
--- not a separate entity). No SID/Quantity here -- those depend on
--- which seller is carrying the product, so they live in
--- Seller_Inventory instead.
 -- ------------------------------------------------------------
 CREATE TABLE Product (
     PID           INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -51,8 +47,7 @@ CREATE TABLE Product (
 -- ------------------------------------------------------------
 -- Relationship-with-attribute: Seller_Inventory
 -- Resolves the M:N relationship between Seller and Product.
--- Key is fully composed of the two FKs (SID, PID) -- not a weak
--- entity, just an associative table.
+-- Key is fully composed of the two FKs (SID, PID)
 -- ------------------------------------------------------------
 CREATE TABLE Seller_Inventory (
     SID       INTEGER NOT NULL,
@@ -66,7 +61,6 @@ CREATE TABLE Seller_Inventory (
 -- ------------------------------------------------------------
 -- Weak entity: Payment_Card
 -- Each card has exactly one address and one phone number.
--- Identifying relationship: Buyer (1) -- Owns --> Payment_Card (N)
 -- ------------------------------------------------------------
 CREATE TABLE Payment_Card (
     CardID       INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -97,7 +91,6 @@ CREATE TABLE Cart (
 -- ------------------------------------------------------------
 -- Strong entity: Order
 -- Has its own surrogate key; permanent record created at checkout.
--- Relationships: Buyer --Places--> Order, Order --Paid_with--> Payment_Card
 -- ------------------------------------------------------------
 CREATE TABLE "Order" (
     OrderID     INTEGER PRIMARY KEY AUTOINCREMENT,

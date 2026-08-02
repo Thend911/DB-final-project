@@ -8,3 +8,6 @@ wheels/
 
 # Virtual environments
 .venv
+
+# User defined files
+exec.py
