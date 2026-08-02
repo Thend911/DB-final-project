@@ -103,3 +103,100 @@ Order_Item(OrderID FK, SID FK, PID FK, Quantity, Price_at_purchase,
            PRIMARY KEY(OrderID, SID, PID),
            FOREIGN KEY(SID, PID) REFERENCES Seller_Inventory(SID, PID))
 ```
+# 3. How to run this platform
+
+## Step 1 — Install Git
+ 
+You need Git to clone the repository.
+ 
+**Check if you already have it:**
+```bash
+git --version
+```
+ 
+**If not installed:**
+- **Windows:** Download from [git-scm.com/download/win](https://git-scm.com/download/win) and run the installer (defaults are fine).
+- **macOS:** Run `git --version` in Terminal — macOS will prompt you to install the Xcode Command Line Tools if Git isn't present. Or install via Homebrew: `brew install git`.
+- **Linux (Debian/Ubuntu):** `sudo apt update && sudo apt install git`
+## Step 2 — Install Python
+ 
+You need Python 3.12 or newer (the repo's `.python-version` pins 3.12).
+ 
+**Check if you already have it:**
+```bash
+python3 --version
+```
+ 
+**If not installed:**
+- **Windows:** Download from [python.org/downloads](https://www.python.org/downloads/). During install, check **"Add Python to PATH"**.
+- **macOS:** Download from [python.org/downloads](https://www.python.org/downloads/), or `brew install python3`.
+- **Linux (Debian/Ubuntu):** `sudo apt install python3`
+**Verify `sqlite3` is bundled** (it ships with Python by default):
+```bash
+python3 -c "import sqlite3; print(sqlite3.sqlite_version)"
+```
+This should print a version number with no errors.
+ 
+## Step 3 — Clone the repository
+ 
+Open a terminal, navigate to wherever you want the project folder to live, then run:
+ 
+```bash
+git clone https://github.com/Thend911/DB-final-project.git
+cd DB-final-project
+```
+ 
+This downloads all the repo's files into a new `DB-final-project` folder and moves you into it.
+ 
+## Step 4 — Set up the database
+ 
+The repo ships with a pre-built `ecommerce.db`, but it's best practice to rebuild it fresh from the `.sql` file so you know exactly what state it's in:
+ 
+```bash
+python3 init_db.py
+```
+ 
+You should see output confirming the tables and row counts, e.g.:
+ 
+```
+Database created at: /path/to/DB-final-project/ecommerce.db
+Tables created (9): Buyer, Cart, Order, Order_Item, Payment_Card, Product, Seller, Seller_Inventory, sqlite_sequence
+  - Buyer: 3 row(s)
+  ...
+```
+ 
+No `pip install` or `uv sync` is required for this step — it only uses Python's built-in `sqlite3` module.
+ 
+*(If you'd rather use `uv`, the repo's package manager of choice, you can run `uv sync` first to set up an isolated environment, then `uv run init_db.py` — but this is optional since there are no real third-party dependencies to install.)*
+ 
+## Step 5 — Run the CLI
+ 
+```bash
+python3 main.py
+```
+ 
+You'll get an interactive menu:
+ 
+```
+==== Happy to assist with your shopping today! ====
+1. View all products (by seller)
+2. Browse products by category
+3. Add product to cart
+4. View my cart
+5. Checkout
+6. View order history
+7. Run sample SQL reports (Requirement 5a)
+0. Exit
+```
+ 
+Type a number and press Enter. Sample Buyer IDs to try: `1` (Alice Johnson), `2` (Brian Lee), `3` (Carla Gomez).
+ 
+## Step 6 — Reset anytime
+ 
+If your test data gets messy, just rebuild the database from the seed file again:
+ 
+```bash
+python3 init_db.py
+```
+
+> Note: if `python3` returns an error, try using command `python` instead
