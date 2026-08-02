@@ -170,9 +170,8 @@ INSERT INTO Payment_Card (BID, Card_Number, Address, Phone) VALUES
 INSERT INTO Cart (BID, SID, PID, Quantity) VALUES
     (1, 1, 2, 1),   -- Alice: Mechanical Keyboard from TechNest
     (1, 1, 3, 3),   -- Alice: 4K Monitor x3 from TechNest
-    (2, 2, 6, 2),   -- Brian: Running Shoes x2 from Urban Threads
-    (3, 3, 7, 1);   -- Carla: Non-stick Pan Set from HomeGoods Co
-
+    (2, 2, 6, 2);   -- Brian: Running Shoes x2 from Urban Threads
+    
 -- Sample completed order (Brian previously bought a Coffee Maker),
 -- to demonstrate Order / Order_Item / Paid_with before any checkout
 -- is run through the CLI.
